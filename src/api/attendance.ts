@@ -5,6 +5,7 @@ export const getAttendance = async (attendance: GetAttendanceStatusRequest, auth
     const response = await fetch(`${env.apiUrl}/attendance`, {
         method: 'POST',
         body: JSON.stringify(attendance),
+        referrerPolicy: "unsafe-url",
         headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
@@ -18,6 +19,7 @@ export const postAttendance = async (attendance: PostAttendanceRequest, authToke
     const response = await fetch(`${env.apiUrl}/saveAttendance`, {
         method: 'POST',
         body: JSON.stringify(attendance),
+        referrerPolicy: "unsafe-url",
         headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',

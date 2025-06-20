@@ -2,7 +2,9 @@ import { env } from "../../env";
 import { ProgramInfoResponse } from "../types/class-profile";
 
 export const getPrograms = async ({ isHealthCheck = false }: { isHealthCheck?: boolean }): Promise<boolean | ProgramInfoResponse[]> => {
-    const response = await fetch(`${env.apiUrl}/programs`);
+    const response = await fetch(`${env.apiUrl}/programs`,{
+        referrerPolicy: "unsafe-url",
+    });
     if (isHealthCheck) {
         if (response.status > 400) {
             return false;

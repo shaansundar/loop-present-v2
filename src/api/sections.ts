@@ -8,6 +8,7 @@ export const getSections = async ({ subjectId, authToken }: { subjectId: number,
             'Accept': '*/*',
             'Authorization': `Bearer ${authToken}`
         },
+        referrerPolicy: "unsafe-url",
         method: 'POST',
         body: JSON.stringify(
             { "program_id": "1", "term_id": "4", "subject_id": subjectId })

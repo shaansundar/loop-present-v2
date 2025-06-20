@@ -8,6 +8,7 @@ export const getSubjects = async ({ authToken }: { authToken: string }): Promise
             'Accept': '*/*',
             'Authorization': `Bearer ${authToken}`
         },
+        referrerPolicy: "unsafe-url",
         method: 'POST',
         body: JSON.stringify(
             { "term_id": "4" })
