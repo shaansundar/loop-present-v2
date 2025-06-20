@@ -24,6 +24,9 @@ export default function RootLayout({
   const queryClient = new QueryClient()
   return (
     <html lang="en">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
