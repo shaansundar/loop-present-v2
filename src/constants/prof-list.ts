@@ -113,7 +113,7 @@ export const PROF_LIST: ProfProfile[] = [
     {
         id: 19,
         name: "Prof. Naliniprava Tripathy and Prof. Latha S Chari (Guest Faculty)",
-        email: "naliniprava@iimshillong.ac.in",
+        email: "nalini@iimshillong.ac.in",
         password: "IIMs@123"
     },
     {
