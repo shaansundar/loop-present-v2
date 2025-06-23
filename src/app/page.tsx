@@ -95,9 +95,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col items-start justify-start h-screen w-screen overflow-hidden">
+    <div className="flex flex-col items-start justify-start h-screen w-screen overflow-y-scroll md:overflow-hidden">
       <Header />
-      <div className="flex items-start justify-start gap-4 w-full h-full p-4">
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-start gap-4 w-full h-full p-4">
         <Card className="min-w-1/3 w-fit h-full">
           <CardHeader className="flex flex-col items-start justify-start gap-2">
             <CardTitle className="text-2xl font-bold">
@@ -187,10 +187,10 @@ export default function Home() {
         <div className="flex flex-col items-start justify-start w-full h-full">
           {isSectionsFetched && selectedSection && (
             <Card className="w-full flex-1 h-fit overflow-hidden">
-              <CardHeader className="flex flex-row items-center justify-between px-4">
+              <CardHeader className="flex flex-col md:flex-row items-center justify-between px-4">
                 <CardTitle className="text-2xl w-fit font-bold">Attendance Details</CardTitle>
-                <div className="flex items-center w-fit justify-center gap-4 text-sm">
-                  {`Selected Students : (${selectedStudents.length} / ${currentAttendance?.attendance.length})`}
+                <div className="flex flex-col md:flex-row items-center w-fit justify-center gap-4 text-sm">
+                  <Label className="hidden md:block text-sm">{`Selected Students : (${selectedStudents.length} / ${currentAttendance?.attendance.length})`}</Label>
                   <Button variant="outline" size="icon">
                     <RefreshCcwIcon className="w-4 h-4" />
                   </Button>
