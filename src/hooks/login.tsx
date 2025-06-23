@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export const useLogin = () => {
     return useMutation({
-        mutationFn: (prof: ProfProfile) => login({ email: prof?.email || "", password: prof?.password || "" }),
+        mutationFn: ({ prof, apiUrl }: { prof: ProfProfile, apiUrl: string }) => login({ email: prof?.email || "", password: prof?.password || "" }, apiUrl),
         onSuccess: () => {
             toast.success("Login successful");
         },

@@ -1,8 +1,10 @@
-import { env } from "../../env";
 import { SubjectInfoResponse } from "@/types/class-profile";
 
-export const getSubjects = async ({ authToken }: { authToken: string }): Promise<SubjectInfoResponse> => {
-    const response = await fetch(`${env.apiUrl}/subjects`, {
+// Helper function to ensure HTTP protocol for specific IP
+
+
+export const getSubjects = async ({ authToken, apiUrl }: { authToken: string, apiUrl: string }): Promise<SubjectInfoResponse> => {
+    const response = await fetch(`${apiUrl}/subjects`, {
         headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',

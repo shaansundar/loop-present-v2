@@ -1,8 +1,8 @@
-import { env } from "../../env";
 import { SectionInfoResponse } from "@/types/class-profile";
 
-export const getSections = async ({ subjectId, authToken }: { subjectId: number, authToken: string }): Promise<SectionInfoResponse> => {
-    const response = await fetch(`${env.apiUrl}/sections`, {
+
+export const getSections = async ({ subjectId, authToken, apiUrl }: { subjectId: number, authToken: string, apiUrl: string }): Promise<SectionInfoResponse> => {
+    const response = await fetch(`${apiUrl}/sections`, {
         headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
