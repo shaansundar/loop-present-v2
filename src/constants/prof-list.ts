@@ -5,7 +5,7 @@ export const PROF_LIST: ProfProfile[] = [
         id: 1,
         name: "Prof. Basav Roychoudhury",
         email: "basav@iimshillong.ac.in",
-        password: "IIMs@123"
+        password: "2003@BR"
     },
     {
         id: 2,

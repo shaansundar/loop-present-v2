@@ -15,5 +15,10 @@ export const login = async (login: LoginRequest, apiUrl: string): Promise<LoginR
             'Authorization': `Bearer ${''}`
         }
     });
-    return response.json();
+    const res = await response.json();
+    if (res.status === 200) {
+        return res.data;
+    } else {
+        throw new Error(res.message);
+    }
 };

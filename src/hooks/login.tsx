@@ -10,8 +10,8 @@ export const useLogin = () => {
         onSuccess: () => {
             toast.success("Login successful");
         },
-        onError: () => {
-            toast.error("Login failed, check the email and password");
+        onError: (error) => {
+            toast.error(`Login Failed: ${error.message}`);
         },
     });
 };
