@@ -20,8 +20,7 @@ import { AttendanceResponse } from "@/types/student-profile";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { RefreshCcwIcon } from "lucide-react";
-import { env } from "process";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
 
@@ -32,27 +31,18 @@ export default function Home() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProxy, ] = useEnvState();
-  const [apiUrl, setApiUrl] = useState(env.apiUrl);
   
   const { authToken, setAuthToken } = useAuthToken();
   const { mutateAsync: login } = useLogin();
-  const { data: subjects, isFetched: isSubjectsFetched } = useFetchSubjects({ authToken: authToken || "", apiUrl: apiUrl || "" });
-  const { data: sections, isFetched: isSectionsFetched } = useFetchSections({ subjectId: selectedSubject?.id || 0, authToken: authToken || "", apiUrl: apiUrl || "" });
-  const { data: currentAttendance } = useFetchCurrentAttendance({ authToken: authToken || "", programId: 1, termId: 4, subjectId: selectedSubject?.id || 0, sectionId: selectedSection?.id || 0, apiUrl: apiUrl || "" });
+  const { data: subjects, isFetched: isSubjectsFetched } = useFetchSubjects({ authToken: authToken || "", isProxy });
+  const { data: sections, isFetched: isSectionsFetched } = useFetchSections({ subjectId: selectedSubject?.id || 0, authToken: authToken || "", isProxy });
+  const { data: currentAttendance } = useFetchCurrentAttendance({ authToken: authToken || "", programId: 1, termId: 4, subjectId: selectedSubject?.id || 0, sectionId: selectedSection?.id || 0, isProxy });
   const { mutateAsync: postAttendance } = usePostAttendance();
   const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (isProxy) {
-      setApiUrl('http://proxy.nimbushq.xyz/api');
-    } else {
-      setApiUrl('http://10.10.1.35/api');
-    }
-  }, [isProxy]);
-
   const handleLogin = async () => {
     if (!selectedProf) return;
-    const data = await login({ prof: selectedProf, apiUrl: apiUrl || "" });
+    const data = await login({ prof: selectedProf, isProxy });
     if (data.token) {
       setAuthToken(data.token);
       setIsLoggedIn(true);
@@ -76,7 +66,7 @@ export default function Home() {
   const handleMarkAttendance = async () => {
     console.log(selectedStudents);
     selectedStudents.forEach(async (item) => {
-      await postAttendance({ authToken: authToken || "", id: item.id, pageid: item.pageid, program_id: 1, term_id: 4, subject_id: item.subject_id, section_id: item.section_id, student_id: item.student_id, apiUrl: apiUrl || "" });
+      await postAttendance({ authToken: authToken || "", id: item.id, pageid: item.pageid, program_id: 1, term_id: 4, subject_id: item.subject_id, section_id: item.section_id, student_id: item.student_id, isProxy });
     })
     setSelectedStudents([]);
   }

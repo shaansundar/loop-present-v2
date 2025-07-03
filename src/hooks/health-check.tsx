@@ -1,4 +1,4 @@
-import { getPrograms } from "@/api/programs";
+import { getPrograms } from "@/app/api/programs/route";
 import { useQuery } from "@tanstack/react-query";
 
 export const useHealthCheck = () => {

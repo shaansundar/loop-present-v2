@@ -1,12 +1,30 @@
 import { useMutation } from "@tanstack/react-query";
-
-import { ProfProfile } from "@/types/prof-profile";
-import { login } from "@/api/login";
 import { toast } from "sonner";
+import { ProfProfile } from "@/types/prof-profile";
+
+const login = async ({ prof, isProxy }: { prof: ProfProfile, isProxy: boolean }) => {
+    console.log("🚀 ~ login ~ prof:", prof);
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prof, isProxy }),
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Login failed');
+    }
+
+    return response.json();
+};
+
+
 
 export const useLogin = () => {
     return useMutation({
-        mutationFn: ({ prof, apiUrl }: { prof: ProfProfile, apiUrl: string }) => login({ email: prof?.email || "", password: prof?.password || "" }, apiUrl),
+        mutationFn: login,
         onSuccess: () => {
             toast.success("Login successful");
         },
