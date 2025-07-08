@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PROF_LIST } from "@/constants/prof-list";
 import { STUDENTS_LIST } from "@/constants/students-list";
 import { useAuthToken } from "@/hooks/auth-token";
-import { useEnvState } from "@/hooks/env-state";
+import { useAuthTokenState, useEnvState } from "@/hooks/env-state";
 import { useFetchCurrentAttendance } from "@/hooks/fetch-current-attendance";
 import { useFetchSections } from "@/hooks/fetch-sections";
 import { useFetchSubjects } from "@/hooks/fetch-subjects";
@@ -21,6 +21,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { RefreshCcwIcon } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
 
@@ -31,7 +32,7 @@ export default function Home() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProxy, ] = useEnvState();
-  
+  const [usePrefetchedAuthToken] = useAuthTokenState();
   const { authToken, setAuthToken } = useAuthToken();
   const { mutateAsync: login } = useLogin();
   const { data: subjects, isFetched: isSubjectsFetched } = useFetchSubjects({ authToken: authToken || "", isProxy });
@@ -42,10 +43,17 @@ export default function Home() {
 
   const handleLogin = async () => {
     if (!selectedProf) return;
+    if (usePrefetchedAuthToken) {
+      setAuthToken(PROF_LIST.find(prof => prof.id === selectedProf?.id)?.accessToken || null);
+      setIsLoggedIn(true);
+      return;
+    }
     const data = await login({ prof: selectedProf, isProxy });
     if (data.token) {
       setAuthToken(data.token);
       setIsLoggedIn(true);
+    } else {
+      toast.error("Login failed");
     }
   }
 

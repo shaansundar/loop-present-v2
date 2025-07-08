@@ -1,15 +1,15 @@
 "use client"
 import React from 'react'
 import { Switch } from './ui/switch'
-import { useEnvState } from '@/hooks/env-state'
+import { useAuthTokenState, useEnvState } from '@/hooks/env-state'
 import { useHealthCheck } from '@/hooks/health-check'
 import clsx from 'clsx'
 import { Badge } from '@/components/ui/badge';
 import { Separator } from './ui/separator';
 const Header = () => {
     const [isProxy, setIsProxy] = useEnvState();
+    const [usePrefetchedAuthToken, setUsePrefetchedAuthToken] = useAuthTokenState();
     const { data: isHealthCheck, isLoading } = useHealthCheck({ isProxy });
-
 
     return (
         <div className='w-full !h-16 border-b flex items-center justify-between px-4 py-2'>
@@ -21,6 +21,9 @@ const Header = () => {
                 <Separator orientation='vertical' className='h-4' />
                 <p className='text-sm font-medium -mr-2'>Proxy? </p>
                 <Switch checked={isProxy} onCheckedChange={setIsProxy} />
+                <Separator orientation='vertical' className='h-4' />
+                <p className='text-sm font-medium -mr-2'>Use Prefetched Auth Token </p>
+                <Switch checked={usePrefetchedAuthToken} onCheckedChange={setUsePrefetchedAuthToken} />
             </div>
         </div>
     )
