@@ -3,7 +3,7 @@ import { forceHttpForLocalIPs } from "@/utils/api-utils";
 
 async function handler(req: NextRequest) {
     try {
-        const { authToken, isProxy } = await req.json();
+        const { isProxy } = await req.json();
 
         let apiUrl = isProxy ? 'http://proxy.nimbushq.xyz/api' : 'http://10.10.1.35/api';
         apiUrl = forceHttpForLocalIPs(apiUrl);
@@ -13,7 +13,6 @@ async function handler(req: NextRequest) {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': '*/*',
-                'Authorization': `Bearer ${authToken}`
             }
         });
 
@@ -32,7 +31,7 @@ async function handler(req: NextRequest) {
     }
 }
 
-export { handler as POST };
+export { handler as GET };
 
 // const response = await fetch(`${env.apiUrl}/programs`,{
 //     referrerPolicy: "unsafe-url",

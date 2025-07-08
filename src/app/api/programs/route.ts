@@ -1,28 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { forceHttpForLocalIPs } from "@/utils/api-utils";
 
-async function handler(req: NextRequest) {
+export async function GET(request: NextRequest) {
     try {
-        const { authToken, isProxy } = await req.json();
+        const searchParams = request.nextUrl.searchParams;
+        const isProxy = searchParams.get('isProxy') === 'true';
+        const authToken = searchParams.get('authToken');
 
         let apiUrl = isProxy ? 'http://proxy.nimbushq.xyz/api' : 'http://10.10.1.35/api';
         apiUrl = forceHttpForLocalIPs(apiUrl);
 
         const response = await fetch(`${apiUrl}/programs`, {
-            referrerPolicy: "unsafe-url",
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': '*/*',
                 'Authorization': `Bearer ${authToken}`
-            }
+            },
+            cache: 'no-store',
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return NextResponse.json(data);
+        return NextResponse.json({response},{status: response.status});
 
     } catch (error) {
         if (error instanceof Error) {
@@ -31,18 +29,3 @@ async function handler(req: NextRequest) {
         return NextResponse.json({ error: 'An unknown error occurred' }, { status: 500 });
     }
 }
-
-export { handler as POST };
-
-// const response = await fetch(`${env.apiUrl}/programs`,{
-//     referrerPolicy: "unsafe-url",
-// });
-// if (isHealthCheck) {
-//     if (response.status > 400) {
-//         return false;
-//     } else {
-//         return true;
-//     }
-// }
-// const data = await response.json();
-// return data;
