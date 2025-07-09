@@ -18,8 +18,8 @@ export const PROF_LIST: ProfProfile[] = [
         id: 24,
         name: "Prof. Sheetal",
         email: "sheetal@iimshillong.ac.in",
-        password: "2038@S",
-        accessToken: '492|OuIPvKoFbpftmFbR3eZhUHlKTh5wOsrl7sX8LnbG23a88b9a'
+        password: "2039@S",
+        accessToken: '640|e2Z82Bf4lzhYHC7sY4LVuH8a7mAD9Ja6hC3ljwuN7560dcd0'
     },
     {
         id: 2,
@@ -60,7 +60,7 @@ export const PROF_LIST: ProfProfile[] = [
         id: 11,
         name: "Prof. Teidorlang Lyngdoh",
         email: "teidorlang@iimshillong.ac.in",
-        password: "2031@TL",
+        password: "2032@TL",
         accessToken: '508|aeSpCcrBuKnkIWwilJCkbcLDZWd29RumrTIIkFmN170bb864'
     },
     {

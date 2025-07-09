@@ -1,7 +1,7 @@
 
 const bruteforce = async () => {
-    const password_initials = "BJG"
-    const email = "bidyut@iimshillong.ac.in"
+    const password_initials = "TL"
+    const email = "teidorlang@iimshillong.ac.in"
     let i = 2000 
     // let j = 3000
 
