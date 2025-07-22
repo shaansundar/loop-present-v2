@@ -78,6 +78,13 @@ export const PROF_LIST: ProfProfile[] = [
         accessToken:'526|bYl08x18Ytgi7t2N0M85ZsRRGkNFoPg53x78JM5we2e7c9f4'
     },
     {
+        id: 4,
+        name: "Prof. Debasisha Mishra",
+        email: "debasisha@iimshillong.ac.in",
+        password: "2014@DM",
+        accessToken:'47817|Z0fYGWaqucUok0biSphcsvd5brRkWUleSlGGGjaSfdc45e39'
+    },
+    {
         id: 15,
         name: "Prof. Subhadip Mukherjee",
         email: "subhadip@iimshillong.ac.in",
@@ -98,12 +105,6 @@ export const PROF_LIST: ProfProfile[] = [
         password: "2015@BJG",
         accessToken:'529|IpcXceksycYeAUo78iIsB9O6ybzazm33vFejQdiT6c718cb3'
     },
-    // {
-    //     id: 3,
-    //     name: "Mr. Vibhu Dewan (Guest Faculty)",
-    //     email: "vibhu@iimshillong.ac.in",
-    //     password: "IIMs@123"
-    // },
     // {
     //     id: 5,
     //     name: "Prof. Debasisha Mishra",
